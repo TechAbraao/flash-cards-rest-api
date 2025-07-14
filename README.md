@@ -1,1 +1,3 @@
-# flash-cards-rest-api
+# Flash Cards REST API
+
+### Technologies
