@@ -15,24 +15,48 @@
 ## Instalação
 
 ```bash
-# Clone o repositório
-git clone https://github.com/TechAbraao/flash-cards-rest-api.git
+# Clone o repositório já trazendo o submódulo templates
+git clone --recurse-submodules https://github.com/TechAbraao/flash-cards-rest-api.git
 
-# Acesse o projeto
+# Acesse o diretório do projeto
 cd flash-cards-rest-api
+
+# (Opcional) Se esqueceu do --recurse-submodules, inicialize o submódulo manualmente
+git submodule update --init --recursive
 
 # Crie o ambiente virtual
 python3 -m venv .venv
 
-# Ative o ambiente virtual (Linux)
-source .venv/bin/activate  # Ou .venv\Scripts\activate no Windows
+# Ative o ambiente virtual (Linux ou Mac)
+source .venv/bin/activate
 
-# Instale as dependências
+# Ou, se estiver no Windows
+# .venv\Scripts\activate
+
+# Instale as dependências do projeto
 pip install -r src/requirements.txt
 
-# Execute o projeto
+# Acesse a pasta de código-fonte
 cd src
+
+# Rode a aplicação Flask
 flask run
+```
+## Atualizando o submódulo templates (quando houver alterações)
+```bash
+# Acesse a pasta do submódulo
+cd src/app/templates
+
+# Busque as últimas alterações do repositório de templates
+git pull origin main  # ou a branch correta
+
+# Volte para o repositório principal
+cd ../../../..
+
+# Adicione e commite a atualização do submódulo
+git add src/app/templates
+git commit -m "Atualiza submódulo templates"
+git push origin main
 ```
 
 ## Contrato e Definições da API
