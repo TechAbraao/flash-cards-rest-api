@@ -10,7 +10,6 @@
     <img alt="Static Badge" src="https://img.shields.io/badge/MySQL-grey?style=flat&logo=MySQL">
     <img alt="Static Badge" src="https://img.shields.io/badge/MySQL Workbench-grey?style=flat&logo=MySQL">
     <img alt="Static Badge" src="https://img.shields.io/badge/Postman-grey?style=flat&logo=Postman">
-    <img alt="Static Badge" src="https://img.shields.io/badge/Yaml-grey?style=flat&logo=yaml">
 </section>
 
 ## Instalação
@@ -32,10 +31,11 @@ source .venv/bin/activate  # Ou .venv\Scripts\activate no Windows
 pip install -r src/requirements.txt
 
 # Execute o projeto
+cd src
 flask run
 ```
 
-## Contrato da API
+## Contrato e Definições da API
 ### Endpoints
 #### Decks
 
@@ -46,6 +46,16 @@ flask run
 | GET   | `/api/decks/<id>`      | Obter detalhes de um deck      |
 | PUT   | `/api/decks/<id>`      | Atualizar informações de um deck |
 
+##### Exemplo de Payload para Decks
+
+```json
+{
+  "title": "História - Revolução Francesa Atualizado",
+  "description": "Deck atualizado com mais flashcards sobre a Revolução Francesa.",
+  "tags": ["história", "revolução", "frança"]
+}
+```
+
 #### Flashcards
 
 | Método | URL                                 | Descrição                           |
@@ -55,4 +65,40 @@ flask run
 | GET   | `/api/cards/<card_id>`              | Buscar flashcard específico         |
 | PUT   | `/api/cards/<card_id>`              | Atualizar flashcard específico      |
 | DELETE| `/api/cards/<card_id>`              | Remover flashcard                   |
+
+#### Exemplo de Payload para Flashcards
+
+```json
+{
+  "question": "Quando ocorreu a Revolução Francesa?",
+  "answer": "Em 1789.",
+  "tags": ["história", "datas", "revolução"]
+}
+```
+
+#### Formato das Respostas da API:
+Todas as respostas da API seguem o seguinte padrão:
+
+- Sucesso
+```json
+{
+  "success": true,
+  "message": "Mensagem descritiva da operação",
+  "data": { /* objeto ou lista retornada */ }
+}
+```
+
+- Erro
+```json
+{
+  "success": false,
+  "message": "Mensagem de erro",
+  "data": null
+}
+```
+> **Observações:**  
+> - O campo `data` contém os dados retornados pela operação ou `null` em caso de erro.  
+> - O campo `message` descreve o resultado da operação ou o motivo do erro.
+
+
 

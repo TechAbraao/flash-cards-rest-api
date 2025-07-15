@@ -1,7 +1,14 @@
 from flask import Flask
 
+from src.app.blueprints.api.decks import decks
+from src.app.blueprints.api.flashcards import flashcards
+
 def create_app() -> Flask:
     app = Flask(__name__)
+    
+    app.register_blueprint(decks)
+    app.register_blueprint(flashcards)  
+    
     return app
 
 app = create_app()
