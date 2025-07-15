@@ -1,0 +1,17 @@
+{
+  "files.exclude": {
+    "**/__pycache__/": true,
+    "**/.pytest_cache/": true,
+    "**/.mypy_cache/": true,
+    "**/.venv/": false,
+    "**/.env/": true,
+    "**/.vscode/": false  
+  },
+  "search.exclude": {
+    "**/__pycache__/": true,
+    "**/.pytest_cache/": true,
+    "**/.mypy_cache/": true,
+    "**/.venv/": true,
+    "**/.env/": true
+  }
+}
