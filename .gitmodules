@@ -1,0 +1,3 @@
+[submodule "src/app/templates"]
+	path = src/app/templates
+	url = https://github.com/TechAbraao/flash-cards-template
