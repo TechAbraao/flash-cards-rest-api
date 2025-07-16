@@ -122,7 +122,7 @@ Todas as respostas da API seguem o seguinte padrão:
 }
 ```
 > **Observações:**  
-> - O campo `data` contém os dados retornados pela operação ou `null` em caso de erro.  
+> - O campo `error` contém o objeto de erro ou lista de erros.  
 > - O campo `message` descreve o resultado da operação ou o motivo do erro.
 
 
