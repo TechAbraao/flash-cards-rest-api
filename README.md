@@ -118,7 +118,7 @@ Todas as respostas da API seguem o seguinte padrão:
 {
   "success": false,
   "message": "Mensagem de erro",
-  "error: { /* objeto ou lista de erros */ }
+  "error": { /* objeto ou lista de erros */ }
 }
 ```
 > **Observações:**  
