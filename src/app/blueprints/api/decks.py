@@ -20,7 +20,7 @@ def get_decks():
         message="Listagem de decks retornada com sucesso.", 
         data=mock,
         status_code=200
-        )
+    )
 
 @decks.route('/decks', methods=['POST'])
 def create_deck(): pass

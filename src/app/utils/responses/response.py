@@ -1,7 +1,5 @@
 from flask import jsonify
 
-
-
 class APIResponse:
     @staticmethod
     def success(message='', data=None, status_code=None):
