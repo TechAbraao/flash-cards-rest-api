@@ -4,6 +4,7 @@
 <section align="left">
     <img alt="Static Badge" src="https://img.shields.io/badge/Python-grey?style=flat&logo=Python">
     <img alt="Static Badge" src="https://img.shields.io/badge/Unittest-grey?style=flat&logo=Python">
+    <img alt="Static Badge" src="https://img.shields.io/badge/Marshmallow-grey?style=flat&logo=Python">
     <img alt="Static Badge" src="https://img.shields.io/badge/Flask-grey?style=flat&logo=Flask">
     <img alt="Static Badge" src="https://img.shields.io/badge/SQLALchemy-grey?style=flat&logo=SQLAlchemy">
     <img alt="Static Badge" src="https://img.shields.io/badge/Docker-grey?style=flat&logo=Docker">
@@ -117,7 +118,7 @@ Todas as respostas da API seguem o seguinte padrão:
 {
   "success": false,
   "message": "Mensagem de erro",
-  "data": null
+  "error: { /* objeto ou lista de erros */ }
 }
 ```
 > **Observações:**  

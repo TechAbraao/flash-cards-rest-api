@@ -16,3 +16,14 @@ class Deck(Base):
 
     def __repr__(self):
         return f"<Deck(id={self.id}, title={self.title}, description={self.description})>"
+    
+    def to_dict(self):
+        return {
+            'id': str(self.id),
+            'title': self.title,
+            'description': self.description,
+            'tags': self.tags,
+            'created_at': self.created_at.isoformat() if self.created_at else None,
+            'updated_at': self.updated_at.isoformat() if self.updated_at else None,
+            'flashcards': [flashcard.to_dict() for flashcard in self.flashcards] if self.flashcards else []
+        }

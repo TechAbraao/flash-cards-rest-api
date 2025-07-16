@@ -11,10 +11,10 @@ class APIResponse:
         return jsonify(response), status_code
 
     @staticmethod
-    def error(message='', data=None, status_code=400):
+    def error(message='', error=None, status_code=400):
         response = {
             'success': False,
             'message': message,
-            'data': data
+            'error': error
         }
         return jsonify(response), status_code
