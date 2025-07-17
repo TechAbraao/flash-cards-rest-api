@@ -13,6 +13,10 @@
     <img alt="Static Badge" src="https://img.shields.io/badge/Postman-grey?style=flat&logo=Postman">
 </section>
 
+### Funcionalidades
+- __Gerenciamento de Decks:__ criar, listar, atualizar, excluir e visualizar detalhes de decks de flashcards.
+- __Gerenciamento de Flashcards:__ criar flashcards, associá-los a decks, buscar aleatoriamente ou individualmente, atualizar e remover flashcards.
+
 ## Instalação
 
 ```bash
@@ -124,6 +128,4 @@ Todas as respostas da API seguem o seguinte padrão:
 > **Observações:**  
 > - O campo `error` contém o objeto de erro ou lista de erros.  
 > - O campo `message` descreve o resultado da operação ou o motivo do erro.
-
-
 

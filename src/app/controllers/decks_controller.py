@@ -4,8 +4,9 @@ from werkzeug.exceptions import BadRequest
 from marshmallow import ValidationError
 
 class DecksController:
-    def __init__(self, request_validator, deck_services):
+    def __init__(self, request_validator, deck_services, id_validator):
         self.request_validator = request_validator
+        self.id_validator = id_validator
         self.deck_services = deck_services
     
     def get_all_decks(self):
@@ -21,7 +22,24 @@ class DecksController:
             data=decks,
             status_code=200
         )
-
+    
+    def get_deck_by_id(self, id): 
+        try:
+            id_validated = self.id_validator.load({"id": id})
+        except ValidationError as err:
+            return APIResponse.error(
+                message="Erro na validação.",
+                error=err.messages,
+                status_code=BadRequest.code
+            )
+        
+        find_deck = self.deck_services.get_deck_by_id(id)
+        return APIResponse.success(
+            message="Deck encontrado com sucesso.",
+            data=find_deck,
+            status_code=200
+        )
+        
     def create_deck(self, data):
         try:
             deck_validated = self.request_validator.load(data)
@@ -40,4 +58,4 @@ class DecksController:
             status_code=201
         )
         
-        
+    
