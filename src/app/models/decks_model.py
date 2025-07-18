@@ -6,7 +6,7 @@ class Deck(Base):
     __tablename__ = 'decks'
 
     id = Column(UUID, primary_key=True, unique=True, nullable=False)
-    title = Column(String(30), nullable=False)
+    title = Column(String(40), nullable=False)
     description = Column(String(500), nullable=True)
     tags = Column(ARRAY(String), nullable=True)
     created_at = Column(DateTime, nullable=False)

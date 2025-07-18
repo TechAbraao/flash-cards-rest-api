@@ -58,4 +58,22 @@ class DecksController:
             status_code=201
         )
         
-    
+    def change_existing_deck(self, data, id): 
+        try:
+            id_validated = self.id_validator.load({"id": id})
+        except ValidationError as err:
+            return APIResponse.error(
+                message="Erro na validação do campo UUID.",
+                error=err.messages,
+                status_code=BadRequest.code
+            )
+        if not data:
+            return {"error": "Corpo JSON inválido ou ausente"}, 400
+        
+        data_model = self.request_validator.load(data)
+        self.deck_services.update_deck(id, data_model)
+        return APIResponse.success(
+            message="Deck atualizado com sucesso.",
+            status_code=200,
+            data=data
+        )
