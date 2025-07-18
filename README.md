@@ -85,17 +85,18 @@ git push origin main
 }
 ```
 
-#### Flashcards
+#### Cards
 
 | Método | URL                                 | Descrição                           |
 | ------ | ----------------------------------- | ----------------------------------- |
-| POST  | `/api/decks/<deck_id>/cards`        | Adicionar flashcard ao deck         |
-| GET   | `/api/decks/<deck_id>/cards/random` | Buscar flashcard aleatório do deck  |
-| GET   | `/api/cards/<card_id>`              | Buscar flashcard específico         |
-| PUT   | `/api/cards/<card_id>`              | Atualizar flashcard específico      |
-| DELETE| `/api/cards/<card_id>`              | Remover flashcard                   |
+| POST  | `/api/decks/<deck_id>/cards`        | Adicionar card ao deck              |
+| GET   | `/api/decks/<deck_id>/cards`        | Buscar todos os cards de um deck    |
+| GET   | `/api/decks/<deck_id>/cards/random` | Buscar card aleatório do deck       |
+| GET   | `/api/cards/<card_id>`              | Buscar card específico              |
+| PUT   | `/api/cards/<card_id>`              | Atualizar card específico           |
+| DELETE| `/api/cards/<card_id>`              | Remover card                        |
 
-#### Exemplo de Payload para Flashcards
+#### Exemplo de Payload para Cards
 
 ```json
 {
