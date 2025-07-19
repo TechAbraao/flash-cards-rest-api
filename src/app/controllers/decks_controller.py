@@ -10,11 +10,11 @@ class DecksController:
         self.deck_services = deck_services
     
     def get_all_decks(self):
-        decks = self.deck_services.get_all_decks()
+        decks = self.deck_services.get_all_decks() or mock["mock_get_decks"]
         if not decks:
             return APIResponse.error(
             message="Nenhum deck encontrado. Retornando dados mock.",
-            data=mock["mock_get_decks"],
+            data=decks,
             status_code=200
         )
         return APIResponse.success(

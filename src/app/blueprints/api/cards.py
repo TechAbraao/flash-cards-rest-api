@@ -1,16 +1,16 @@
-from flask import Blueprint
+from flask import Blueprint, request
 from src.app.controllers.cards_controller import CardsController
-from src.app.services.cards_services import CardsService
-from src.app.validators.cards_validator import CardsValidator
 
 cards = Blueprint('cards', __name__, url_prefix='/api')
-controller = CardsController(service = CardsService(), validator = CardsValidator())
-
-@cards.route('/decks/<string:deck_uuid>/cards', methods=['GET'])
-def get_cards_by_deck(deck_uuid): return controller.get_cards_by_deck(deck_uuid)
+controller = CardsController()
 
 @cards.route('/decks/<string:deck_uuid>/cards', methods=['POST'])
-def add_card_at_deck(): pass
+def add_card_at_deck(deck_uuid): 
+    return controller.post_cards_by_deck(deck_uuid, request.get_json())
+
+@cards.route('/decks/<string:deck_uuid>/cards', methods=['GET'])
+def get_cards_by_deck(deck_uuid): 
+    return controller.get_cards_by_deck(deck_uuid)
 
 @cards.route('/decks/<string:deck_uuid>/cards/random', methods=['GET'])
 def get_random_card(deck_uuid): pass

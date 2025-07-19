@@ -12,7 +12,7 @@ class Deck(Base):
     created_at = Column(DateTime, nullable=False)
     updated_at = Column(DateTime, nullable=False)
 
-    flashcards = relationship("Flashcard", back_populates="deck", cascade="all, delete-orphan")  # Relacionamento - um deck tem várias flashcards
+    cards = relationship("Cards", back_populates="deck", cascade="all, delete-orphan")
 
     def __repr__(self):
         return f"<Deck(id={self.id}, title={self.title}, description={self.description})>"
@@ -25,5 +25,5 @@ class Deck(Base):
             'tags': self.tags,
             'created_at': self.created_at.isoformat() if self.created_at else None,
             'updated_at': self.updated_at.isoformat() if self.updated_at else None,
-            'flashcards': [flashcard.to_dict() for flashcard in self.flashcards] if self.flashcards else []
+            'cards': [cards.to_dict() for cards in self.cards] if self.cards else []
         }

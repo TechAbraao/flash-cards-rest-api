@@ -24,4 +24,4 @@ start:
 	cd src && ../$(VENV_FLASK) run
 
 create-database:
-	cd src && PYTHONPATH=. ../$(VENV_PYTHON) -c "from app.settings.database.init_db import init_db; init_db()"
+	PYTHONPATH=src $(VENV_PYTHON) -c "from app.settings.database.init_db import init_db; init_db()"

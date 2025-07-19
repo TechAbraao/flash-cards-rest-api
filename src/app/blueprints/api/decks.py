@@ -1,6 +1,6 @@
 from flask import Blueprint, request
 from src.app.controllers.decks_controller import DecksController
-from src.app.schemas.docks_schema import request_decks_schema, request_deck_id_schema
+from src.app.schemas.decks_schema import request_decks_schema, request_deck_id_schema
 from src.app.services.decks_services import decks_services
 
 decks = Blueprint('decks', __name__, url_prefix='/api/')
