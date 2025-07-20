@@ -25,3 +25,6 @@ def get_deck(deck_id):
 @decks.route("/decks/<string:deck_id>", methods=['PUT'])
 def update_deck(deck_id): 
     return controller.change_existing_deck(request.get_json(), deck_id)
+
+@decks.route("/decks/<string:deck_id>", methods = ["DELETE"])
+def delete_deck(deck_id): pass

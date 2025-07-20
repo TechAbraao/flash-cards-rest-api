@@ -1,6 +1,6 @@
-# Flash Cards REST API
+# Flash Cards REST API | Backend for Flashcard Management
 
-### Tecnologias
+### Technologies
 <section align="left">
     <img alt="Static Badge" src="https://img.shields.io/badge/Python-grey?style=flat&logo=Python">
     <img alt="Static Badge" src="https://img.shields.io/badge/Unittest-grey?style=flat&logo=Python">
@@ -13,120 +13,140 @@
     <img alt="Static Badge" src="https://img.shields.io/badge/Postman-grey?style=flat&logo=Postman">
 </section>
 
-### Funcionalidades
-- __Gerenciamento de Decks:__ criar, listar, atualizar, excluir e visualizar detalhes de decks de flashcards.
-- __Gerenciamento de Flashcards:__ criar flashcards, associá-los a decks, buscar aleatoriamente ou individualmente, atualizar e remover flashcards.
+### Features
+- __Deck Management:__ create, list, update, delete, and view deck details.  
+- __Card Management:__ create cards, associate them with decks, search randomly or individually, update, and delete cards.
 
-## Instalação
-
+## Installation Guide
+#### 1. Clone the repository and initialize submodules
 ```bash
-# Clone o repositório já trazendo o submódulo templates
 git clone --recurse-submodules https://github.com/TechAbraao/flash-cards-rest-api.git
-
-# Acesse o diretório do projeto
 cd flash-cards-rest-api
 
-# (Opcional) Se esqueceu do --recurse-submodules, inicialize o submódulo manualmente
+# (Optional) If you forgot --recurse-submodules, initialize the submodule manually
 git submodule update --init --recursive
+```
 
-# Crie o ambiente virtual
+#### 2. Create and activate the virtual environment
+```bash
 python3 -m venv .venv
 
-# Ative o ambiente virtual (Linux ou Mac)
+# Activate the virtual environment (Linux or Mac)
 source .venv/bin/activate
 
-# Ou, se estiver no Windows
+# Or, if you're on Windows
 # .venv\Scripts\activate
-
-# Instale as dependências do projeto
+```
+#### 3. Install dependencies
+```bash
 pip install -r src/requirements.txt
+```
+#### 4. Configure environment variables
+- Rename the .env.example file to .env and edit the variables accordingly:
+```bash
+# Default Flask app configurations
+FLASK_APP=src.app:create_app
+FLASK_ENV=development
+FLASK_DEBUG=1
+PYTHONPATH=.
 
-# Acesse a pasta de código-fonte
-cd src
-
-# Rode a aplicação Flask
+# Database configurations
+DATABASE_HOST=
+DATABASE_PORT=
+DATABASE_USER=
+DATABASE_PASSWORD=
+DATABASE_NAME=
+```
+#### 5. Run the Flask application
+```bash
 flask run
 ```
-## Atualizando o submódulo templates (quando houver alterações)
+#### 6. Access and test the API
 ```bash
-# Acesse a pasta do submódulo
+# Use Postman or any HTTP client to test the available endpoints. Access:
+http://<host>:<port> to start using the API.
+```
+
+## Templates submodule update (for updates or experimental front-end)
+```bash
+# Enter the submodule folder
 cd src/app/templates
 
-# Busque as últimas alterações do repositório de templates
-git pull origin main  # ou a branch correta
+# Fetch the latest changes from the templates repository
+git pull origin main  # or the correct branch
 
-# Volte para o repositório principal
+# Go back to the main repository
 cd ../../../..
 
-# Adicione e commite a atualização do submódulo
+# Add and commit the submodule update
 git add src/app/templates
-git commit -m "Atualiza submódulo templates"
+git commit -m "Update templates submodule"
 git push origin main
 ```
 
-## Contrato e Definições da API
+## API Reference
 ### Endpoints
 #### Decks
 
-| Método | URL                   | Descrição                      |
+| Method | URL | Description |
 | ------ | --------------------- | ------------------------------- |
-| GET   | `/api/decks`           | Listar todos os decks          |
-| POST  | `/api/decks`           | Criar um novo deck             |
-| GET   | `/api/decks/<id>`      | Obter detalhes de um deck      |
-| PUT   | `/api/decks/<id>`      | Atualizar informações de um deck |
+| GET | `/api/decks` | List all decks |
+| POST | `/api/decks` | Create a new deck |
+| GET | `/api/decks/<id>` | Get deck details |
+| PUT | `/api/decks/<id>` | Update deck information |
+| DELETE | `/api/decks/<id>` | Delete a deck |
 
-##### Exemplo de Payload para Decks
+- Example Payload for Decks
 
 ```json
 {
-  "title": "História - Revolução Francesa Atualizado",
-  "description": "Deck atualizado com mais flashcards sobre a Revolução Francesa.",
-  "tags": ["história", "revolução", "frança"]
+"title": "History - French Revolution Updated",
+"description": "Deck updated with more flashcards about the French Revolution.",
+"tags": ["history", "revolution", "france"]
 }
 ```
 
 #### Cards
 
-| Método | URL                                 | Descrição                           |
+| Method | URL | Description |
 | ------ | ----------------------------------- | ----------------------------------- |
-| POST  | `/api/decks/<deck_id>/cards`        | Adicionar card ao deck              |
-| GET   | `/api/decks/<deck_id>/cards`        | Buscar todos os cards de um deck    |
-| GET   | `/api/decks/<deck_id>/cards/random` | Buscar card aleatório do deck       |
-| GET   | `/api/cards/<card_id>`              | Buscar card específico              |
-| PUT   | `/api/cards/<card_id>`              | Atualizar card específico           |
-| DELETE| `/api/cards/<card_id>`              | Remover card                        |
+| POST | `/api/decks/<deck_id>/cards` | Add card to deck |
+| GET | `/api/decks/<deck_id>/cards` | Search for all cards in a deck |
+| GET | `/api/decks/<deck_id>/cards/random` | Search for a random card in the deck |
+| GET | `/api/cards/<card_id>` | Search for a specific card |
+| PUT | `/api/cards/<card_id>` | Update a specific card |
+| DELETE | `/api/cards/<card_id>` | Remove card |
 
-#### Exemplo de Payload para Cards
+- Example Payload for Cards
 
 ```json
 {
-  "question": "Quando ocorreu a Revolução Francesa?",
-  "answer": "Em 1789.",
-  "tags": ["história", "datas", "revolução"]
+"question": "When did the French Revolution occur?",
+"answer": "In 1789.",
+"tags": ["history", "dates", "revolution"]
 }
 ```
 
-#### Formato das Respostas da API:
-Todas as respostas da API seguem o seguinte padrão:
+#### API Response Format:
+All API responses follow the following pattern:
 
-- Sucesso
+- Success
 ```json
 {
-  "success": true,
-  "message": "Mensagem descritiva da operação",
-  "data": { /* objeto ou lista retornada */ }
+"success": true,
+"message": "Message describing the operation",
+"data": { /* object or list returned */ }
 }
 ```
 
-- Erro
+- Error
 ```json
 {
-  "success": false,
-  "message": "Mensagem de erro",
-  "error": { /* objeto ou lista de erros */ }
+"success": false,
+"message": "Error message",
+"error": { /* object or list of errors */ }
 }
 ```
-> **Observações:**  
-> - O campo `error` contém o objeto de erro ou lista de erros.  
-> - O campo `message` descreve o resultado da operação ou o motivo do erro.
-
+> **Notes:**
+> - The `error` field contains the error object or list of errors.
+> - The `message` field describes the result of the operation or the reason for the error.
