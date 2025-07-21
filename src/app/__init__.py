@@ -10,6 +10,8 @@ def create_app() -> Flask:
     app.register_blueprint(decks)
     app.register_blueprint(cards)  
     
+    app.config['TESTING']
+    
     @app.errorhandler(DatabaseConnectionError)
     def handle_db_error(e):
         return APIResponse.error(
