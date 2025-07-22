@@ -1,5 +1,6 @@
 from unittest.mock import MagicMock
 from src.app.services.decks_services import decks_services
+from src.app.utils.responses.response import APIResponse
 
 GET_ALL_DECKS_ENDPOINT = "/api/decks"
 
@@ -31,19 +32,14 @@ def test_get_all_decks_fetch(client, monkeypatch):
     assert isinstance(data.get("data"), list)
 
 """ Testa se a resposta da rota GET_ALL_DECKS contém as chaves esperadas. """
-def test_get_all_decks_fetch_structure_payload(client):
-    response = client.get(GET_ALL_DECKS_ENDPOINT)
-    formated_response = response.get_json()
-    assert all(key in formated_response for key in ("message", "data", "success"))
-    
-    data = formated_response["data"]
-    
-    assert data[0]["id"]
-    assert data[0]["title"]
-    assert data[0]["description"]
-    assert data[0]["tags"]
-    assert data[0]["created_at"]
-    assert data[0]["updated_at"]
+def test_api_response_success_model(app):
+    with app.app_context():
+        response, _ = APIResponse.success(message='Ok', data={"foo": "bar"}, status_code=200)
+        data = response.get_json()
+
+        assert data['success'] is True
+        assert data['message'] == 'Ok'
+        assert data['data'] == {"foo": "bar"}
 
 """ Testa se os campos necessários do Payload da API. """
 def test_get_all_decks_fetch_fields_in_data(client):
@@ -57,3 +53,10 @@ def test_get_all_decks_fetch_fields_in_data(client):
     assert data[0]["tags"]
     assert data[0]["created_at"]
     assert data[0]["updated_at"]
+    
+"""Testa as flags do campo message """
+def test_get_all_decks_response_success_flag(client):
+    response = client.get(GET_ALL_DECKS_ENDPOINT)
+    formated_response = response.get_json()
+    field_success = formated_response["success"]
+    assert field_success == True
