@@ -1,4 +1,4 @@
-name: CI - Python Pytest
+name: CI - Tests
 
 on: [push, pull_request]
 

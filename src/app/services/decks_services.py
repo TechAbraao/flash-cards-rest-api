@@ -1,6 +1,7 @@
 from src.app.settings.database.databases import SessionLocal
 from src.app.models.decks_model import Deck
 from uuid import uuid4
+from src.app.utils.mocks.decks_mocks import mocks_responses_decks as mock
 from datetime import datetime
 from src.app.utils.decorators.decorators import handle_db_errors
 

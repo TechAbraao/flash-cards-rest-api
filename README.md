@@ -11,7 +11,7 @@
     <img alt="Static Badge" src="https://img.shields.io/badge/Docker-grey?style=flat&logo=Docker">
     <img alt="Static Badge" src="https://img.shields.io/badge/PostgreSQL-grey?style=flat&logo=PostgreSQL">
     <img alt="Static Badge" src="https://img.shields.io/badge/PgAdmin-grey?style=flat&logo=PostgreSQL">
-    <img alt="Static Badge" src="https://img.shields.io/badge/Github Actions-grey?style=flat&logo=Github Actions">
+    <img alt="Static Badge" src="https://img.shields.io/badge/Github Actions-grey?style=flat&logo=GithubActions">
     <img alt="Static Badge" src="https://img.shields.io/badge/Postman-grey?style=flat&logo=Postman">
 </section>
 
@@ -135,7 +135,7 @@ All API responses follow the following pattern:
 - Success
 ```json
 {
-"success": true,
+"success": True,
 "message": "Message describing the operation",
 "data": { /* object or list returned */ }
 }
@@ -144,7 +144,7 @@ All API responses follow the following pattern:
 - Error
 ```json
 {
-"success": false,
+"success": False,
 "message": "Error message",
 "error": { /* object or list of errors */ }
 }

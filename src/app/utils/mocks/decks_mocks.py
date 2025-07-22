@@ -6,5 +6,11 @@ mocks_responses_decks = {
         'tags': ['Mock - tag1', 'Mock - tag2'],
         'created_at': 'Mock - 2023-10-01T12:00:00Z',
         'updated_at': 'Mock - 2023-10-01T12:00:00Z'
+    }, 
+
+    "response_success": {
+        "success": True,  
+        "message": "Message describing the operation",
+        "data": {}
     }
 }
