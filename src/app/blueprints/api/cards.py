@@ -16,7 +16,7 @@ def get_cards_by_deck(deck_uuid):
 def get_random_card(deck_uuid): pass
 
 @cards.route('/cards/<string:card_uuid>', methods=['GET'])
-def get_cards(deck_uuid): pass    
+def get_cards(card_uuid): return controller.searching_specific_card(card_uuid)
 
 @cards.route('/cards/<string:card_uuid>', methods=['PUT'])
 def update_card(deck_uuid): pass

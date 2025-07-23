@@ -34,14 +34,31 @@ class CardsService:
       self.session.refresh(new_card)
       return new_card
       
-      
    @handle_db_errors
    def get_cards_by_deck_id(self, uuid):
       deck = self.session.query(Deck).options(
          joinedload(Deck.cards)
       ).filter(Deck.id == uuid).first()
-
       if not deck:
+         return None, None
+      deck_infos = deck.to_dict()
+      return deck_infos.get("cards"), deck_infos.get("title")
+   
+   @handle_db_errors
+   def verify_card_id_exists(self, id):
+      result = self.session.query(Cards).filter(Cards.id == id).first()
+      if not result:
+         return False
+      return True
+      
+   @handle_db_errors
+   def verify_deck_id_exists(self, id):
+    result = self.session.query(Deck).filter(Deck.id == id).first()
+    return bool(result)   
+      
+   @handle_db_errors
+   def get_card_by_id(self, card_id):
+      finding_card = self.session.query(Cards).filter(Cards.id == card_id).first()
+      if not finding_card:
          return None
-
-      return deck.to_dict().get("cards")
+      return finding_card.to_dict()

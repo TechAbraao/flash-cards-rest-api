@@ -119,6 +119,7 @@ git push origin main
 | PUT | `/api/cards/<card_id>` | Update a specific card |
 | DELETE | `/api/cards/<card_id>` | Remove card |
 
+
 - Example Payload for Cards
 
 ```json
@@ -152,3 +153,41 @@ All API responses follow the following pattern:
 > **Notes:**
 > - The `error` field contains the error object or list of errors.
 > - The `message` field describes the result of the operation or the reason for the error.
+
+## Project Progress
+
+### Decks API
+- [ ] List all decks (GET /api/decks)
+- [ ] Create a new deck (POST /api/decks)
+  - [ ] Validate title is required and not empty
+  - [ ] Validate tags are list of strings (optional)
+  - [ ] Validate description max length 500 chars
+- [ ] Get deck details (GET /api/decks/<id>)
+  - [ ] Validate UUID format for `<id>`
+- [ ] Update deck information (PUT /api/decks/<id>)
+  - [ ] Validate fields if present (partial update)
+  - [ ] Validate title uniqueness (optional)
+- [ ] Delete a deck (DELETE /api/decks/<id>)
+  - [ ] Validate UUID format for `<id>`
+
+### Cards API
+- [ ] Add card to deck (POST /api/decks/<deck_id>/cards)
+  - [ ] Validate question is required and not empty
+  - [ ] Validate answer is required
+  - [ ] Validate tags are list of strings (optional)
+  - [ ] Validate deck_id is valid UUID and exists
+- [ ] Search all cards in a deck (GET /api/decks/<deck_id>/cards)
+  - [ ] Validate UUID format for `<deck_id>`
+- [ ] Search for random card (GET /api/decks/<deck_id>/cards/random)
+  - [ ] Validate UUID format for `<deck_id>`
+- [ ] Search specific card (GET /api/cards/<card_id>)
+  - [ ] Validate UUID format for `<card_id>`
+- [ ] Update card (PUT /api/cards/<card_id>)
+  - [ ] Validate fields if present
+  - [ ] Validate question uniqueness (optional)
+- [ ] Remove card (DELETE /api/cards/<card_id>)
+  - [ ] Validate UUID format for `<card_id>`
+
+### Testing
+- [ ] Unit tests for Decks endpoints
+- [ ] Unit tests for Cards endpoints

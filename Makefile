@@ -1,4 +1,4 @@
-.PHONY: help venv install start create-database
+.PHONY: help venv install start tests create-database
 
 VENV_DIR = .venv
 VENV_PYTHON = $(VENV_DIR)/bin/python
@@ -11,6 +11,7 @@ help:
 	@echo " * venv             -> Creates virtual environment (.venv)"
 	@echo " * install          -> Installs dependencies from src/requirements.txt"
 	@echo " * start            -> Starts the REST API (Python/Flask)"
+	@echo " * tests            -> Run all tests (PyTest)"
 	@echo " * create-database  -> Initializes the database"
 	@echo ""
 
@@ -22,6 +23,9 @@ install:
 
 start:
 	cd src && ../$(VENV_FLASK) run
+
+tests:
+	$(VENV_PYTHON) -m pytest
 
 create-database:
 	PYTHONPATH=src $(VENV_PYTHON) -c "from app.settings.database.init_db import init_db; init_db()"
