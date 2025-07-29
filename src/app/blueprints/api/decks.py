@@ -1,12 +1,9 @@
 from flask import Blueprint, request
 from src.app.controllers.decks_controller import DecksController
-from src.app.schemas.decks_schema import request_decks_schema, request_deck_id_schema
-from src.app.services.decks_services import decks_services
 from ..constants.routes import DECKS as r
 
 decks = Blueprint('decks', __name__)
-controller = DecksController(request_validator=request_decks_schema, deck_services=decks_services,id_validator=request_deck_id_schema)
-
+controller = DecksController()
 
 @decks.route(r.get("get_all_decks").get("URI"), methods=[r.get("get_all_decks").get("method")])
 def get_all_decks(): return controller.get_all_decks()

@@ -62,3 +62,37 @@ class CardsService:
       if not finding_card:
          return None
       return finding_card.to_dict()
+   
+   @handle_db_errors
+   def update_card(self, id, body):
+      if not body:
+         return None
+      card = self.session.query(Cards).filter(Cards.id == id).first()
+
+      if not card:
+         raise ValueError("Card not found.") 
+      
+      if "question" in body:
+         card.question = body.get("question")
+      
+      if "answer" in body:
+         card.answer = body.get("answer")
+      
+      if "tags" in body:
+         card.tags = body.get("tags")  
+      
+      try:
+         self.session.commit()
+         return card.to_dict()
+      except Exception as e:
+         self.session.rollback()
+         raise e
+      
+   @handle_db_errors
+   def delete_card(self, id) -> bool:
+      card = self.session.query(Cards).filter(Cards.id == id).first()
+      if not card:
+         return False
+      self.session.delete(card)
+      self.session.commit()
+      return True

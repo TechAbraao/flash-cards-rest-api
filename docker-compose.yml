@@ -1,0 +1,36 @@
+services:
+  # Flash Cards Database Service
+  postgres:
+    image: postgres:16.3
+    container_name: flash-cards-database
+    ports:
+      - "5432:${DATABASE_PORT}"
+    environment:
+      POSTGRES_USER: ${DATABASE_USER}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+      POSTGRES_DB: ${DATABASE_NAME}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - flash-cards-network
+
+  # Optional: Enable pgAdmin for database management
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: flash-cards-pgadmin
+    ports:
+      - "${PGADMIN_PORT}:${PGADMIN_CONTAINER_PORT}" # management web interface (http://${PGADMIN_HOST}:${PGADMIN_CONTAINER_PORT}/)
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_PASSWORD}
+    depends_on:
+      - postgres
+    networks:
+      - flash-cards-network
+
+volumes:
+  pgdata:
+
+networks:
+  flash-cards-network:
+

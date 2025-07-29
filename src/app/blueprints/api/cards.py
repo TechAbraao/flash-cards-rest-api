@@ -12,6 +12,7 @@ def add_card_at_deck(deck_uuid):
 def get_cards_by_deck(deck_uuid): 
     return controller.get_cards_by_deck(deck_uuid)
 
+# Implementação pro futuro.
 @cards.route('/decks/<string:deck_uuid>/cards/random', methods=['GET'])
 def get_random_card(deck_uuid): pass
 
@@ -19,7 +20,7 @@ def get_random_card(deck_uuid): pass
 def get_cards(card_uuid): return controller.searching_specific_card(card_uuid)
 
 @cards.route('/cards/<string:card_uuid>', methods=['PUT'])
-def update_card(deck_uuid): pass
+def update_card(card_uuid): return controller.update_card(card_uuid, request.get_json())
 
-@cards.route('/cards/<int:card_uuid>', methods=['DELETE'])
-def delete_card(deck_uuid): pass
+@cards.route('/cards/<string:card_uuid>', methods=['DELETE'])
+def delete_card(card_uuid): return controller.delete_card(card_uuid)

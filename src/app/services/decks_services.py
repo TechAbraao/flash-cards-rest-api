@@ -1,7 +1,6 @@
 from src.app.settings.database.databases import SessionLocal
 from src.app.models.decks_model import Deck
 from uuid import uuid4
-from src.app.utils.mocks.decks_mocks import mocks_responses_decks as mock
 from datetime import datetime
 from src.app.utils.decorators.decorators import handle_db_errors
 
@@ -37,6 +36,13 @@ class DecksServices:
         return new_deck.to_dict()
         
     @handle_db_errors
+    def check_exists_uuid(self, id) -> bool:
+        finding_id = self.session.query(Deck).filter(Deck.id == id).first()
+        if not finding_id:
+            return False
+        return True
+        
+    @handle_db_errors
     def update_deck(self, id, data_deck):
         deck = self.get_deck_by_id(id, type_object="orm")
         if not deck:
@@ -58,4 +64,4 @@ class DecksServices:
             self.session.rollback()
             raise e
 
-decks_services = DecksServices()
+DecksServices()

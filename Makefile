@@ -22,7 +22,7 @@ install:
 	$(VENV_PIP) install -r src/requirements.txt
 
 start:
-	cd src && ../$(VENV_FLASK) run
+	$(VENV_FLASK) run
 
 tests:
 	$(VENV_PYTHON) -m pytest
