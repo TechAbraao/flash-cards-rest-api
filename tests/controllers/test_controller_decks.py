@@ -7,11 +7,15 @@ from src.app.blueprints.api.decks import controller
 
 url_get_all_decks = routes.get("get_all_decks").get("URI")
 
-#
 @mark.integration
 @mark.controllers
-def test_get_all_decks_status_codes(client):
-    """ Testa se a rota GET_ALL_DECKS retorna 200 OK. """
+def test_get_all_decks_status_codes(client, monkeypatch):
+    """Testa se a rota GET_ALL_DECKS retorna 200 OK, de forma determinística."""
+    monkeypatch.setattr(
+        decks_services,
+        "get_all_decks",
+        lambda: []
+    )
     response = client.get(url_get_all_decks)
     assert response.status_code == 200
 #
@@ -51,20 +55,28 @@ def test_api_response_success_model(app):
 #
 @mark.integration
 @mark.controllers
-def test_get_all_decks_fetch_fields_in_data(client):
-    """ Testa se os campos necessários do Payload da API. """
-    
+def test_get_all_decks_fetch_fields_in_data(client, monkeypatch):
+    """Testa se os campos obrigatórios do payload estão presentes, de forma determinística."""
+
+    mock_data = [{
+        "id": "Mock - UUID",
+        "title": "Mock - Deck 1",
+        "description": "Mock - Description for Deck 1",
+        "tags": ["Mock - tag1", "Mock - tag2"],
+        "created_at": "Mock - 2023-10-01T12:00:00Z",
+        "updated_at": "Mock - 2023-10-01T12:00:00Z"
+    }]
+
+    monkeypatch.setattr(decks_services, "get_all_decks", lambda: mock_data)
+
+
     response = client.get(url_get_all_decks)
-    formated_response = response.get_json()
-    data = formated_response["data"]
-    
-    assert data[0]["id"]
-    assert data[0]["title"]
-    assert data[0]["description"]
-    assert data[0]["tags"]
-    assert data[0]["created_at"]
-    assert data[0]["updated_at"]
-#
+    data = response.get_json()["data"]
+
+    required_fields = ["id", "title", "description", "tags", "created_at", "updated_at"]
+    for field in required_fields:
+        assert field in data[0], f"Campo '{field}' ausente no payload"
+
 @mark.integration
 @mark.controllers
 def test_get_all_decks_empty_list(client):

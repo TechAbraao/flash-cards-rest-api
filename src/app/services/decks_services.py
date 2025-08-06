@@ -64,4 +64,4 @@ class DecksServices:
             self.session.rollback()
             raise e
 
-DecksServices()
+decks_services = DecksServices()
